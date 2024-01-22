@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animasi Gif</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="section background-layer">
+        <div class="content">
+            <input type="text" id="yourname" placeholder="Your Name" oninput="toggleButton()">
+            <button onclick="checkAndProceed()" class="btn" style="display: none;">Lanjutkan</button>
+        </div>
+    </section>
+    <script>
+        function toggleButton() {
+            var inputElement = document.getElementById("yourname");
+            var buttonElement = document.querySelector(".btn");
+
+            if (inputElement.value.trim() !== "") {
+                buttonElement.style.display = "block";
+            } else {
+                buttonElement.style.display = "none";
+            }
+        }
+
+        function checkAndProceed() {
+            var nameInputValue = document.getElementById("yourname").value;
+
+            if (nameInputValue.trim() !== "") {
+                hasil();
+            } else {
+                console.log("Please enter your name.");
+            }
+        }
+
+        function hasil() {
+            var nameInputValue = document.getElementById("yourname").value.trim();
+
+            if (nameInputValue !== "") {
+                // Encode the name to handle special characters
+                var encodedName = encodeURIComponent(nameInputValue);
+
+                // Construct the URL with the name as a query parameter
+                var redirectUrl = './conten.html?name=' + encodedName;
+
+                // Redirect to the new URL
+                window.location.href = redirectUrl;
+
+                console.log('Anda berhasil');
+                // Add any other actions you want to perform when the input is valid.
+            } else {
+                console.log("Please enter your name.");
+            }
+        }
+    </script>
+</body>
+
+</html>

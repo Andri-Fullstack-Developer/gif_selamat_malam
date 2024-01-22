@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Content</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .box-img {
+            border: 1px solid black;
+            border-radius: 4px;
+            padding: 3px;
+            background: white;
+            width: 300px;
+
+        }
+
+        .box-img img {
+
+            object-fit: cover;
+            width: 290px;
+            /* height: 200px; */
+        }
+
+        .box-img h2 {
+            font-size: 20px;
+            text-align: center;
+            color: #000000;
+        }
+
+        .card {
+            margin-top: 5px;
+            background: rgba(255, 255, 255, 0.471);
+            padding: 3px;
+            width: 300px;
+            border-width: 5px;
+            border-color: rgba(50, 50, 50, 0.288);
+            border-style: double;
+        }
+
+        .card p {
+            color: rgb(0, 0, 0);
+            font-size: 15px;
+        }
+
+        .posision {
+            position: absolute;
+            /* top: 0; */
+            bottom: 20px;
+            right: 50px;
+            z-index: 999;
+        }
+
+        .container {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.371);
+            border-radius: 4px solid red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            border: 1px solid rgba(56, 56, 56, 0.219);
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        }
+
+        audio {
+            width: 11%;
+            border-radius: 50%;
+        }
+
+        .container #playBtn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 20px;
+        }
+
+        .container #pauseBtn {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 20px;
+        }
+
+        .covertext {
+            position: absolute;
+            bottom: 0;
+
+        }
+
+        .link {
+            text-decoration: none;
+            color: inherit;
+            font-size: 15px;
+        }
+
+        .textaanimasi {
+            font-weight: 700;
+            text-align: center;
+            font-size: 15px;
+            font-family: Hack, sans-serif;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #000, #fff, #000);
+            letter-spacing: 5px;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-repeat: no-repeat;
+            background-size: 80%;
+            animation: shine 5s linear infinite;
+            position: relative;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position-x: -500%;
+            }
+
+            100% {
+                background-position-x: 500%;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+           .link{
+            display: none;
+           }
+        }
+    </style>
+</head>
+
+<body>
+    <section
+        style="background-image: url('/rain-4430_256.gif');
+    background-size: cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; ">
+        <div class="box-img">
+            <img src="./Sleeping baby.gif" alt="">
+            <h2 id="greetingMessage"></h2>
+        </div>
+        <div class="card">
+            <p id="simpleUsage"></p>
+        </div>
+        <div class="posision">
+            <div class="container">
+                <audio id="myAudio" autoplay>
+                    <source src="./a-rainy-day-piano-with-rain-background-3884.mp3" type="audio/mpeg">
+                </audio>
+                <button type="button" id="pauseBtn">
+                    <i class="ri-stop-fill"></i>
+                </button>
+                <button type="button" id="playBtn">
+                    <i class="ri-play-fill"></i>
+                </button>
+            </div>
+        </div>
+        <div class="covertext">
+            <p class="textaanimasi">Welcome to my andri:
+                <br>
+                <a class="link" href="https://portofolio-blue-ten.vercel.app/">web devoloper</a>
+            </p>
+        </div>
+    </section>
+    <script>
+        // 
+        $(document).ready(() => {
+            // when we click on pause button do this ===>>
+            $("#pauseBtn").on("click", () => {
+                $("#myAudio")[0].pause();
+                $("#pauseBtn").fadeOut(400, function() {
+                    $("#playBtn").fadeIn(400);
+                });
+            });
+            // when we click on play button do this ===>>
+            $("#playBtn").on("click", () => {
+                $("#myAudio")[0].play();
+                $("#playBtn").fadeOut(400, function() {
+                    $("#pauseBtn").fadeIn(400);
+                });
+            });
+
+
+            // when audio file is end do this ===>
+            $("#myAudio").on("ended", () => {
+                $("#myAudio")[0].pause();
+                $("#pauseBtn").fadeOut(400, function() {
+                    $("#playBtn").fadeIn(400);
+                });
+            });
+
+        });
+
+        var tytext = document.getElementById('simpleUsage')
+        var urlParams = new URLSearchParams(window.location.search);
+        var nameFromUrl = urlParams.get('name');
+        if (nameFromUrl) {
+            var greetingMessage = document.getElementById('greetingMessage');
+            greetingMessage.textContent = 'Selamat Malam, ' + decodeURIComponent(nameFromUrl) + '!';
+        } else {
+            document.write('<p>No name parameter found.</p>');
+        }
+
+        new TypeIt(tytext, {
+            strings: "Selamat malam! Semoga malam ini membawa ketenangan dan mimpi yang indah. Istirahatlah dengan nyaman dan bangun dengan semangat baru esok pagi. Selamat beristirahat! ",
+            speed: 200,
+            waitUntilVisible: true,
+        }).go();
+    </script>
+</body>
+
+</html>
